@@ -1,5 +1,26 @@
 <div class="main">
-    <h1>My To Do's List</h1>  
+    <h1>My To Do's List</h1>
+
+
+    <h2>{{items.length}} <span *ngIf="items.length === 1; else elseBlock">item</span>
+      <ng-template #elseBlock>items</ng-template></h2>
+      
+      <ul>
+        <li *ngFor="let i of items">
+          <app-item (remove)="remove(i)" [item]="i"></app-item>
+        </li>
+      </ul>
+      
+    <label for="addItemInput">For today:</label>
+    <input
+      #newItem
+      placeholder="add an item"
+      (keyup.enter)="addItem(newItem.value); newItem.value = ''"
+      class="lg-text-input"
+      id="addItemInput" />
+
+    <button class="btn-primary" (click)="addItem(newItem.value)">Add</button>
+  
     <ul>
       <li *ngFor="let item of items">{{item.description}}</li>
     </ul>
